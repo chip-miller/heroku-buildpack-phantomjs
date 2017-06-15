@@ -1,18 +1,29 @@
-Heroku buildpack: PhantomJS
+# Heroku buildpack: PhantomJS
 =======================
 
 This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks) of PhantomJS(http://phantomjs.org).
 
-Usage
------
+## Local Usage
 
-Example usage:
+- Install phantomjs
+  - e.g. ` brew install phantomjs `
+  
+## Heroku Usage
 
-```shell
-$ heroku create --stack cedar --buildpack https://github.com/ga-wolf/heroku-buildpack-phantomjs.git
+- Add the buildpack
 
-# or if your app is already created:
-$ heroku buildpacks:add https://github.com/ga-wolf/heroku-buildpack-phantomjs
-
-$ git push heroku master
 ```
+heroku buildpacks:add https://github.com/jamesnugent00/heroku-buildpack-phantomjs
+```
+
+- Change your Heroku paths
+
+```
+heroku config:set PATH="/usr/local/bin:/usr/bin:/bin:/app/vendor/bin"
+heroku config:set LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/lib:/app/vendor/phantomjs/lib
+```
+
+- Restart your Heroku app
+  - e.g. ` heroku restart `
+- Create a new deploy
+  - e.g. ` git push heroku master `
